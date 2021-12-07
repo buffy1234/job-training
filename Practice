@@ -1,0 +1,36 @@
+pipeline {
+    agent any 
+    options {
+        timeout(time: 1, unit: 'HOURS')
+        buildDiscarder(logRotator(numToKeepStr: '50', artifactNumToKeepStr: '50'))
+
+    }
+    parameters {
+      string(
+        name: 'name',
+        defaultValue: 'Kindly enter ur name',
+        description: 'Enter the AWS AMI'
+      )
+      string(
+        name: 'place',
+        description: 'kindly enter ur place'
+      )
+      choice(
+        choices: ['dev', 'prod'], 
+        name: 'PARAMETER'               
+        )
+      }
+    stages {
+        stage('Stage 1') {
+            steps {
+                echo '$name' 
+            }
+        }
+        stage('Stage 2') {
+            steps {
+                echo '$place'
+               }
+            }
+        
+    }
+}
